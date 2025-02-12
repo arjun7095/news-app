@@ -1,12 +1,24 @@
+import { useState, useEffect } from "react";
+
 export default function NewsCard({ article }) {
-  // Check if article exists and has required data
   if (!article || !article.title || !article.url || !article.urlToImage) return null;
+
+  const [windowWidth, setWindowWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1200);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const isMobile = windowWidth <= 768;
+  const isSmallScreen = windowWidth <= 480;
 
   return (
     <div
       style={{
-        width: "600px",
-        padding: "20px 100px",
+        width: isSmallScreen ? "100%" : isMobile ? "90%" : "600px",
+        padding: isSmallScreen ? "10px" : isMobile ? "15px" : "20px 100px",
         margin: "20px auto",
         backgroundColor: "#ffffff",
         boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
@@ -17,7 +29,6 @@ export default function NewsCard({ article }) {
         alignItems: "center",
         textAlign: "center",
       }}
-      className="news-card"
     >
       {/* Image */}
       <img
@@ -25,23 +36,21 @@ export default function NewsCard({ article }) {
         alt={article.title}
         style={{
           width: "100%",
-          height: "300px",
+          height: isSmallScreen ? "200px" : isMobile ? "250px" : "300px",
           objectFit: "cover",
           borderRadius: "10px",
         }}
-        className="news-image"
       />
 
       {/* News Content */}
-      <div style={{ marginTop: "15px", padding: "0 20px" }} className="news-content">
+      <div style={{ marginTop: "15px", padding: "0 20px" }}>
         <h2
           style={{
-            fontSize: "22px",
+            fontSize: isSmallScreen ? "16px" : isMobile ? "18px" : "22px",
             fontWeight: "bold",
             color: "#2c3e50",
             marginBottom: "10px",
           }}
-          className="news-title"
         >
           {article.title}
         </h2>
@@ -49,12 +58,11 @@ export default function NewsCard({ article }) {
         {article.description && (
           <p
             style={{
-              fontSize: "16px",
+              fontSize: isSmallScreen ? "13px" : isMobile ? "14px" : "16px",
               color: "#555",
               lineHeight: "1.5",
               marginBottom: "15px",
             }}
-            className="news-description"
           >
             {article.description}
           </p>
@@ -64,22 +72,23 @@ export default function NewsCard({ article }) {
         <div
           style={{
             display: "flex",
+            flexDirection: isMobile ? "column" : "row",
             justifyContent: "space-between",
             alignItems: "center",
             width: "100%",
             marginTop: "15px",
             padding: "10px 0",
             borderTop: "1px solid #eee",
+            textAlign: isMobile ? "center" : "left",
           }}
-          className="news-footer"
         >
           <span
             style={{
               fontSize: "14px",
               color: "#888",
               fontStyle: "italic",
+              marginBottom: isMobile ? "10px" : "0",
             }}
-            className="news-source"
           >
             {article.source?.name || "Unknown Source"}
           </span>
@@ -90,12 +99,11 @@ export default function NewsCard({ article }) {
             rel="noopener noreferrer"
             style={{
               textDecoration: "none",
-              fontSize: "16px",
+              fontSize: isSmallScreen ? "13px" : "16px",
               fontWeight: "600",
               color: "#007bff",
               transition: "color 0.3s",
             }}
-            className="read-more"
             onMouseOver={(e) => (e.target.style.color = "#0056b3")}
             onMouseOut={(e) => (e.target.style.color = "#007bff")}
           >
