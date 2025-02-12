@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Header from "../../components/Header";
-import NewsCard from "../../components/NewsCard";
-import Pagination from "../../components/Pagination";
+import Header from "../components/Header";
+import NewsCard from "../components/NewsCard";
+import Pagination from "../components/Pagination";
 
 const API_KEY = process.env.NEXT_PUBLIC_NEWS_API_KEY;
 const BASE_URL = "https://newsapi.org/v2/top-headlines";
