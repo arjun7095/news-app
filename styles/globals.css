@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ✨ General Styles */
+body {
+  @apply bg-gray-100 text-gray-900;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ✨ Container */
+.container {
+  @apply max-w-7xl mx-auto p-6 md:p-8;
+}
+
+/* ✨ News Grid */
+.news-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6;
+}
+
+/* ✨ News Card */
+.news-card {
+  @apply bg-white shadow-lg rounded-lg p-4 overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-2xl flex flex-col;
+}
+
+/* Fixed size for images */
+.news-image {
+  @apply w-full h-52 object-cover rounded-md;
+}
+
+/* If no image is available */
+.no-image {
+  @apply w-full h-52 bg-gray-200 flex items-center justify-center text-gray-500 text-sm rounded-md;
+}
+
+/* ✨ News Content */
+.news-content {
+  @apply flex flex-col justify-between h-full;
+}
+
+.news-title {
+  @apply text-lg font-semibold text-gray-900 hover:text-blue-600 transition duration-200 mt-2;
+}
+
+.news-description {
+  @apply text-gray-700 text-sm mt-2 line-clamp-3;
+}
+
+/* ✨ Footer */
+.news-footer {
+  @apply flex justify-between items-center mt-4;
+}
+
+.news-source {
+  @apply text-xs text-gray-500 font-medium;
+}
+
+.read-more {
+  @apply text-blue-500 hover:text-blue-700 font-medium transition;
+}
+
+/* ✨ Pagination */
+.pagination {
+  @apply flex justify-center space-x-3 mt-8;
+}
+
+.page-button {
+  @apply bg-blue-500 text-white px-4 py-2 rounded-md transition hover:bg-blue-700;
+}
+
+.page-button[disabled] {
+  @apply bg-gray-300 cursor-not-allowed;
+}
+
+/* ✨ Loading Animation */
+.loading {
+  @apply text-center text-lg text-gray-600 font-semibold animate-pulse;
+}
+
+/* ✨ Responsive Enhancements */
+@media (min-width: 768px) {
+  .news-card {
+    @apply p-6;
+  }
+
+  .news-title {
+    @apply text-xl;
+  }
+}
+
+@media (min-width: 1024px) {
+  .news-image {
+    @apply h-60;
+  }
+}
